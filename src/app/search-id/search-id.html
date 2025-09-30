@@ -1,0 +1,17 @@
+<p>ID recherché : {{ idSource }}</p>
+<p>ID en lecture seule : {{ idReadonly }}</p>
+<input [(ngModel)]="idSource" placeholder="Entrez un ID" (input)="idReadonly = idSource" />
+<input [value]="idReadonly" readonly />
+<select [(ngModel)]="selectedId" (ngModelChange)="updateSelectedPokemon()">
+  <option *ngFor="let p of pokemons" [value]="p.id">
+    {{ p.name }}
+  </option>
+</select>
+<button (click)="searchById(idReadonly)">Rechercher</button>
+<br>
+@if (selectedPokemon) {
+    <p>Pokémon sélectionné : {{ selectedPokemon.name }} (ID: {{ selectedPokemon.id }})</p>
+}
+@else {
+    <p>Aucun Pokémon sélectionné.</p>
+}
