@@ -1,19 +1,48 @@
-<p>ID recherché : {{ idSource }}</p>
-<p>ID en lecture seule : {{ idReadonly }}</p>
-<input [(ngModel)]="idSource" placeholder="Entrez un ID" />
-<input [value]="idReadonly" readonly />
-<input [(ngModel)]="filterText" placeholder="Filtrer les Pokémons" />
-<select [(ngModel)]="idReadonly" (ngModelChange)="updateSelectedPokemon()">
-  <option value="">-- Choisir un Pokémon --</option>
-  <option *ngFor="let p of pokemons | filterPokemonPipe:'name':filterText" [value]="p.id">
-    {{ p.name }}
-  </option>
-</select>
+<div class="main-container">
+  <!-- Colonne des champs -->
+  <div class="inputs-column">
+    <mat-form-field class="pokemons-id-input">
+      <mat-label>Pokemon ID</mat-label>
+      <input matInput placeholder="Entrez un ID" [(ngModel)]="idSource" />
+    </mat-form-field>
+    <mat-form-field class="pokemons-id-readonly">
+      <mat-label>ID en lecture Seule</mat-label>
+      <input matInput [value]="idReadonly ?? ''" readonly />
+    </mat-form-field>
+    <mat-form-field class="pokemons-Filter-input">
+      <mat-label>Pokemon ID</mat-label>
+      <input matInput [(ngModel)]="filterText" placeholder="Filtrer les Pokémons" />
+    </mat-form-field>
 
-<button (click)="idReadonly = idSource; searchById(idReadonly)">Rechercher</button>
-<br />
-@if (selectedPokemon) {
-<p>Pokémon sélectionné : {{ selectedPokemon.name }} (ID: {{ selectedPokemon.id }})</p>
-} @else {
-<p>Aucun Pokémon sélectionné.</p>
-}
+    <mat-form-field>
+      <mat-label>Choisir un pokemon</mat-label>
+      <mat-select>
+        <mat-option value="">-- Choisir un Pokémon --</mat-option>
+        <mat-option
+          *ngFor="let p of pokemons | filterPokemonPipe : 'name' : filterText"
+          [value]="p.id"
+          (click)="idReadonly = p.id; updateSelectedPokemon()"
+        >
+          {{ p.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- Bouton centré verticalement -->
+  <div class="button-column">
+    <button mat-mini-fab (click)="searchById(idReadonly)">Go!</button>
+  </div>
+
+  <!-- Résultat à droite -->
+  <div class="result-column">
+    @if (show && selectedPokemon) {
+    <!-- <p>Pokémon sélectionné :</p> -->
+    <p>
+      <strong>{{ selectedPokemon.name }}</strong> (ID: {{ selectedPokemon.id }})
+    </p>
+    } @else {
+    <p>Aucun Pokémon sélectionné.</p>
+    }
+  </div>
+</div>

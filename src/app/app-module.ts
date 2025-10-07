@@ -10,11 +10,22 @@ import { App } from './app';
 import { SearchId } from './search-id/search-id';
 import { FilterPokemonPipePipe } from './filter-pokemon--pipe-pipe';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [App, SearchId, FilterPokemonPipePipe],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, BrowserModule, AutoCompleteModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    BrowserModule,
+    AutoCompleteModule,
+    MatButtonModule,
+    MatInputModule,
+    MatSelectModule,
+  ],
   providers: [provideBrowserGlobalErrorListeners(), provideZonelessChangeDetection()],
   bootstrap: [App],
 })

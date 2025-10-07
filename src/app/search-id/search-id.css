@@ -1,0 +1,51 @@
+.main-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;        /* centre verticalement le contenu */
+  justify-content: center;    /* centre horizontalement tout le bloc */
+  gap: 40px;                  /* espace entre les 3 colonnes */
+  width: 100%;
+  margin-top: 40px;
+}
+
+/* Colonne des inputs */
+.inputs-column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputs-column input,
+.inputs-column select {
+  width: 250px;
+  padding: 6px 8px;
+  box-sizing: border-box;
+}
+
+/* Colonne du bouton (centrée verticalement) */
+.button-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Colonne du résultat (à droite) */
+.result-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 250px;
+}
+
+/* Responsive : tout en colonne sur mobile */
+@media (max-width: 800px) {
+  .main-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+  .button-column,
+  .result-column {
+    align-self: center;
+  }
+}

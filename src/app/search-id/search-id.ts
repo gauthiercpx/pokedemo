@@ -9,20 +9,26 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
   styleUrl: './search-id.css',
 })
 export class SearchId {
-  idSource: Number | null = 0;
-  idReadonly: Number | null = 0;
+  idSource: Number | null = null;
+  idReadonly: Number | null = null;
   selectedPokemon?: Pokemon;
   filterText: string = '';
+  show: boolean = false;
 
   updateSelectedPokemon() {
+    this.show = false;
     this.selectedPokemon = this.pokemons.find((p) => p.id === Number(this.idReadonly));
-    this.idReadonly = Number(this.idSource);
     this.idSource = null;
   }
   searchById(arg0: Number | null) {
-      this.idReadonly = Number(arg0);
-      this.updateSelectedPokemon();
+    if (this.idSource !== null) {
+      this.idReadonly = this.idSource;
+    } else {
+      this.idReadonly = arg0;
     }
+    this.updateSelectedPokemon();
+    this.show = true;
+  }
 
   pokemons: Pokemon[] = [
     new Pokemon(1, 'Bulbasaur'),
