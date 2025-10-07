@@ -13,6 +13,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [App, SearchId, FilterPokemonPipePipe],
@@ -26,7 +27,11 @@ import { MatSelectModule } from '@angular/material/select';
     MatInputModule,
     MatSelectModule,
   ],
-  providers: [provideBrowserGlobalErrorListeners(), provideZonelessChangeDetection()],
+  providers: [
+    provideBrowserGlobalErrorListeners(),
+    provideZonelessChangeDetection(),
+    provideHttpClient()
+  ],
   bootstrap: [App],
 })
 export class AppModule {}

@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Pokemon } from '../pokemon';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { PokeAPI } from '../poke-api';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-search-id',
@@ -8,12 +11,14 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
   templateUrl: './search-id.html',
   styleUrl: './search-id.css',
 })
-export class SearchId {
+export class SearchId implements OnInit {
   idSource: Number | null = null;
   idReadonly: Number | null = null;
   selectedPokemon?: Pokemon;
   filterText: string = '';
   show: boolean = false;
+
+  constructor(private pokeAPI: PokeAPI) {}
 
   updateSelectedPokemon() {
     this.show = false;
@@ -39,6 +44,14 @@ export class SearchId {
 
   filteredPokemons: Pokemon[] = [];
 
+  ngOnInit() {
+    this.pokeAPI.getPokemonById(undefined, 50, 0).subscribe((data: any) => {
+      this.pokemons = data.results; // chaque élément a un 'name' et 'url'
+      console.log(this.pokemons);
+    });
+  }
+
+  
   filterPokemon(event: any) {
     const query = event.query.toLowerCase();
     this.filteredPokemons = this.pokemons.filter((p) => p.name.toLowerCase().includes(query));

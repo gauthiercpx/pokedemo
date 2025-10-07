@@ -1,17 +1,17 @@
 <div class="main-container">
   <!-- Colonne des champs -->
   <div class="inputs-column">
-    <mat-form-field class="pokemons-id-input">
+    <mat-form-field class="pokemons-id-input" floatLabel="auto">
       <mat-label>Pokemon ID</mat-label>
-      <input matInput placeholder="Entrez un ID" [(ngModel)]="idSource" />
+      <input matInput [(ngModel)]="idSource" />
     </mat-form-field>
     <mat-form-field class="pokemons-id-readonly">
       <mat-label>ID en lecture Seule</mat-label>
-      <input matInput [value]="idReadonly ?? ''" readonly />
+      <input matInput [(ngModel)]="idReadonly" readonly />
     </mat-form-field>
     <mat-form-field class="pokemons-Filter-input">
-      <mat-label>Pokemon ID</mat-label>
-      <input matInput [(ngModel)]="filterText" placeholder="Filtrer les Pokémons" />
+      <mat-label>Filter</mat-label>
+      <input matInput [(ngModel)]="filterText" />
     </mat-form-field>
 
     <mat-form-field>
