@@ -1,9 +1,9 @@
 .main-container {
   display: flex;
   flex-direction: row;
-  align-items: center;        /* centre verticalement le contenu */
-  justify-content: center;    /* centre horizontalement tout le bloc */
-  gap: 40px;                  /* espace entre les 3 colonnes */
+  align-items: center; /* centre verticalement le contenu */
+  justify-content: center; /* centre horizontalement tout le bloc */
+  gap: 40px; /* espace entre les 3 colonnes */
   width: 100%;
   margin-top: 40px;
 }
@@ -35,6 +35,16 @@
   flex-direction: column;
   justify-content: center;
   min-width: 250px;
+}
+
+
+/* Style du Pokémon affiché */
+.poke-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsive : tout en colonne sur mobile */

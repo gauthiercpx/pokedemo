@@ -13,6 +13,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import {MatCardModule} from '@angular/material/card';
 import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
@@ -26,6 +27,7 @@ import { provideHttpClient } from '@angular/common/http';
     MatButtonModule,
     MatInputModule,
     MatSelectModule,
+    MatCardModule,
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

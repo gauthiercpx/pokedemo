@@ -36,14 +36,32 @@
   <!-- Résultat à droite -->
   <div class="result-column">
     @if (show && selectedPokemon){
-    <h2>{{ selectedPokemon.name | titlecase }} (ID: {{ selectedPokemon.id }})</h2>
-    <img [src]="selectedPokemon.sprite" alt="{{ selectedPokemon.name }}" />
-    <p>Taille : {{ selectedPokemon.height }}</p>
-    <p>Poids : {{ selectedPokemon.weight }}</p>
-    <p>Types : {{ selectedPokemon.types?.join(', ') }}</p>
-    <p>Abilities : {{ selectedPokemon.abilities?.join(', ') }}</p>
+    <mat-card class="poke-card" appearance="outlined">
+      <mat-card-header style="display:flex; justify-content:center;">
+        <mat-card-title
+          >{{ selectedPokemon.name | titlecase }} (ID: {{ selectedPokemon.id }})</mat-card-title
+        >
+      </mat-card-header>
+
+      <img mat-card-image [src]="selectedPokemon.sprite" alt="{{ selectedPokemon.name }}" />
+
+      <mat-card-content>
+        <p>Taille : {{ selectedPokemon.height }}</p>
+        <p>Poids : {{ selectedPokemon.weight }}</p>
+        <p>Types : {{ selectedPokemon.types?.join(', ') }}</p>
+        <p>Abilities : {{ selectedPokemon.abilities?.join(', ') }}</p>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-button (click)="idReadonly = null; show = false">Fermer</button>
+      </mat-card-actions>
+    </mat-card>
+    } @else {
+    <mat-card class="poke-card" appearance="outlined">
+      <mat-card-content>
+        <p>Aucun Pokémon sélectionné.</p>
+      </mat-card-content>
+    </mat-card>
     }
-    @else {
-    <p>Aucun Pokémon sélectionné.</p>}
   </div>
 </div>
