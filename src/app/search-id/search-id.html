@@ -16,12 +16,11 @@
 
     <mat-form-field>
       <mat-label>Choisir un pokemon</mat-label>
-      <mat-select>
+      <mat-select [(value)]="idReadonly">
         <mat-option value="">-- Choisir un Pokémon --</mat-option>
         <mat-option
           *ngFor="let p of pokemons | filterPokemonPipe : 'name' : filterText"
           [value]="p.id"
-          (click)="idReadonly = p.id; updateSelectedPokemon()"
         >
           {{ p.name }}
         </mat-option>
@@ -36,13 +35,14 @@
 
   <!-- Résultat à droite -->
   <div class="result-column">
-    @if (show && selectedPokemon) {
-    <!-- <p>Pokémon sélectionné :</p> -->
-    <p>
-      <strong>{{ selectedPokemon.name }}</strong> (ID: {{ selectedPokemon.id }})
-    </p>
-    } @else {
-    <p>Aucun Pokémon sélectionné.</p>
+    @if (show && selectedPokemon){
+    <h2>{{ selectedPokemon.name | titlecase }} (ID: {{ selectedPokemon.id }})</h2>
+    <img [src]="selectedPokemon.sprite" alt="{{ selectedPokemon.name }}" />
+    <p>Taille : {{ selectedPokemon.height }} dm</p>
+    <p>Poids : {{ selectedPokemon.weight }} hg</p>
+    <p>Types : {{ selectedPokemon.types?.join(', ') }}</p>
     }
+    @else {
+    <p>Aucun Pokémon sélectionné.</p>}
   </div>
 </div>
