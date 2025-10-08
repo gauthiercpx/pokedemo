@@ -38,9 +38,10 @@
     @if (show && selectedPokemon){
     <h2>{{ selectedPokemon.name | titlecase }} (ID: {{ selectedPokemon.id }})</h2>
     <img [src]="selectedPokemon.sprite" alt="{{ selectedPokemon.name }}" />
-    <p>Taille : {{ selectedPokemon.height }} dm</p>
-    <p>Poids : {{ selectedPokemon.weight }} hg</p>
+    <p>Taille : {{ selectedPokemon.height }}</p>
+    <p>Poids : {{ selectedPokemon.weight }}</p>
     <p>Types : {{ selectedPokemon.types?.join(', ') }}</p>
+    <p>Abilities : {{ selectedPokemon.abilities?.join(', ') }}</p>
     }
     @else {
     <p>Aucun Pokémon sélectionné.</p>}

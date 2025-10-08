@@ -5,6 +5,7 @@ export class Pokemon {
   weight?: number;
   types?: string[];
   sprite?: string;
+  abilities?: string[];
 
   constructor(
     id: number,
@@ -12,7 +13,8 @@ export class Pokemon {
     height?: number,
     weight?: number,
     types?: string[],
-    sprite?: string
+    sprite?: string,
+    abilities?: string[]
   ) {
     this.id = id;
     this.name = name;
@@ -20,5 +22,6 @@ export class Pokemon {
     this.weight = weight;
     this.types = types;
     this.sprite = sprite;
+    this.abilities = abilities;
   }
 }

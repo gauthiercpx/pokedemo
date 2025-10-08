@@ -42,6 +42,7 @@ export class SearchId implements OnInit {
     const id = Number(this.idReadonly);
     this.selectedPokemon = this.pokemons.find((p) => p.id === id);
     this.idSource = null;
+    this.cdr.detectChanges();
   }
 
   searchById(arg0: number | null) {
@@ -61,11 +62,10 @@ export class SearchId implements OnInit {
           data.height,
           data.weight,
           data.types.map((t: any) => t.type.name),
-          data.sprites.front_default
+          data.sprites.front_default,
+          data.abilities.map((a: any) => a.ability.name)
         );
         console.log('Pokémon récupéré :', this.selectedPokemon);
-        console.log(this.selectedPokemon, this.show = true);
-        // ici show devient vrai dès que le Pokémon est récupéré
         this.show = true;
         this.cdr.detectChanges();
       },
