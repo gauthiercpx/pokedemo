@@ -11,7 +11,7 @@ export class PokeAPI {
     return this.http.get(`${this.apiUrl}?limit=1500`);
   }
 
-  getPokemonInfo(id: number | string, limit: number = 50, offset: number = 0): Observable<any> {
+  getPokemonInfo(id: number | string, limit: number = 1, offset: number = 0): Observable<any> {
     if (id != null) {
       return this.http.get(`${this.apiUrl}/${id}`);
     } else {

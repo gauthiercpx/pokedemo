@@ -25,10 +25,15 @@ export class SearchId implements OnInit {
   ngOnInit() {
     this.pokeAPI.getPokemonList().subscribe({
       next: (data: any) => {
-        this.pokemons = data.results.map((p: any, index: number) => ({
-          id: index + 1,
-          name: p.name.charAt(0).toUpperCase() + p.name.slice(1),
-        }));
+        this.pokemons = data.results.map((p: any) => {
+          const url: string = p.url || '';
+          const m = url.match(/\/pokemon\/(\d+)\/?$/);
+          const id = m ? Number(m[1]) : NaN;
+          return {
+            id: id,
+            name: p.name.charAt(0).toUpperCase() + p.name.slice(1),
+          };
+        });
         console.log(this.pokemons);
       },
       error: (error) => {
