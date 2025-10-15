@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Pokemon } from '../pokemon';
+import { Pokemon, PokemonInformations } from '../pokemon';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { PokeAPI } from '../poke-api';
 import { ChangeDetectorRef } from '@angular/core';
@@ -14,6 +14,7 @@ export class SearchId implements OnInit {
   idSource: number | null = null;
   idReadonly: number | null = null;
   selectedPokemon?: Pokemon;
+  pokemonInfo: PokemonInformations | null = null;
   filterText: string = '';
   show: boolean = false;
 
@@ -31,7 +32,7 @@ export class SearchId implements OnInit {
           const id = m ? Number(m[1]) : NaN;
           return {
             id: id,
-            name: p.name.charAt(0).toUpperCase() + p.name.slice(1),
+            name: p.name,
           };
         });
         console.log(this.pokemons);
@@ -64,13 +65,11 @@ export class SearchId implements OnInit {
         this.selectedPokemon = new Pokemon(
           data.id,
           data.name,
-          data.height,
-          data.weight,
-          data.types.map((t: any) => t.type.name),
-          data.sprites.front_default,
-          data.abilities.map((a: any) => a.ability.name)
+          data.url,
         );
+        this.pokemonInfo = data;
         console.log('Pokémon récupéré :', this.selectedPokemon);
+        console.log('Infos Pokémon :', this.pokemonInfo);
         this.show = true;
         this.cdr.detectChanges();
       },
