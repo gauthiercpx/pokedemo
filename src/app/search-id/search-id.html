@@ -18,12 +18,13 @@
       <mat-label>Choisir un pokemon</mat-label>
       <mat-select [(value)]="idReadonly">
         <mat-option value="">-- Choisir un Pokémon --</mat-option>
-        <mat-option
-          *ngFor="let p of pokemons | filterPokemonPipe : 'name' : filterText"
-          [value]="p.id"
-        >
-          {{ p.id }} - {{ p.name | titlecase }}
-        </mat-option>
+        @for (p of pokemons | filterPokemonPipe : 'name' : filterText; track p) {
+          <mat-option
+            [value]="p.id"
+            >
+            {{ p.id }} - {{ p.name | titlecase }}
+          </mat-option>
+        }
       </mat-select>
     </mat-form-field>
   </div>
@@ -37,35 +38,45 @@
   <div class="result-column">
     <ng-container>
       @if (show && selectedPokemon){
-      <mat-card class="poke-card" appearance="outlined">
-        <mat-card-header style="display: flex; justify-content: center">
-          <mat-card-title
-            >{{ selectedPokemon.name | titlecase }} (ID: {{ selectedPokemon.id }})</mat-card-title
-          >
-        </mat-card-header>
+        <mat-card class="poke-card" appearance="outlined">
+          <mat-card-header style="display: flex; justify-content: center">
+            <mat-card-title
+              >{{ selectedPokemon.name | titlecase }} (ID: {{ selectedPokemon.id }})</mat-card-title
+              >
+            </mat-card-header>
 
-        <img mat-card-image [src]="pokemonInfo?.sprites?.front_default" alt="{{ selectedPokemon.name }}" />
+            <img mat-card-image [src]="pokemonInfo?.sprites?.front_default" alt="{{ selectedPokemon.name }}" />
 
-        <mat-card-content>
-          <p>Taille : {{ pokemonInfo?.height }}</p>
-          <p>Poids : {{ pokemonInfo?.weight }}</p>
-          <p>
-            Types :
-            <ng-container *ngIf="pokemonInfo?.types?.length; else noTypes">
-              <span *ngFor="let t of pokemonInfo?.types; let last = last">
-                {{ t.type.name | titlecase }}<span *ngIf="!last">, </span>
-              </span>
-            </ng-container>
-            <ng-template #noTypes>—</ng-template>
-          </p>
-          <p>
-            Abilities :
-            <ng-container *ngIf="pokemonInfo?.abilities?.length; else noAbilities">
-              <span *ngFor="let a of pokemonInfo?.abilities; let last = last">
-                {{ a.ability?.name | titlecase }}<span *ngIf="!last">, </span>
-              </span>
-            </ng-container>
-            <ng-template #noAbilities>—</ng-template>
+            <mat-card-content>
+              <p>Taille : {{ pokemonInfo?.height }}</p>
+              <p>Poids : {{ pokemonInfo?.weight }}</p>
+              <p>
+                Types :
+                @if (pokemonInfo?.types?.length) {
+                  @for (t of pokemonInfo?.types; track t; let last = $last) {
+                    <span>
+                      {{ t.type.name | titlecase }}@if (!last) {
+                      <span>, </span>
+                    }
+                  </span>
+                }
+              } @else {
+                —
+              }
+            </p>
+            <p>
+              Abilities :
+              @if (pokemonInfo?.abilities?.length) {
+                @for (a of pokemonInfo?.abilities; track a; let last = $last) {
+                  <span>
+                    {{ a.ability?.name | titlecase }}@if (!last) {
+                    <span>, </span>
+                  }
+                </span>
+              }
+            } @else {
+              —
+            }
           </p>
         </mat-card-content>
 
@@ -73,13 +84,13 @@
           <button mat-button (click)="idReadonly = null; show = false">Fermer</button>
         </mat-card-actions>
       </mat-card>
-      } @else {
+    } @else {
       <mat-card class="poke-card" appearance="outlined">
         <mat-card-content>
           <p>Aucun Pokémon sélectionné.</p>
         </mat-card-content>
       </mat-card>
-      }
-    </ng-container>
-  </div>
+    }
+  </ng-container>
+</div>
 </div>
