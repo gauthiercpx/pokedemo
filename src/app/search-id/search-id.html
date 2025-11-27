@@ -3,7 +3,7 @@
   <div class="inputs-column">
     <mat-form-field class="pokemons-id-input" floatLabel="auto">
       <mat-label>Pokemon ID</mat-label>
-      <input matInput [(ngModel)]="idSource" />
+      <input matInput [(ngModel)]="idSource" (keyup.enter)="searchById(idReadonly)" />
     </mat-form-field>
     <mat-form-field class="pokemons-id-readonly">
       <mat-label>ID en lecture Seule</mat-label>
@@ -43,11 +43,11 @@
             <mat-card-title
               >{{ selectedPokemon.name | titlecase }} (ID: {{ selectedPokemon.id }})</mat-card-title
               >
-            </mat-card-header>
+          </mat-card-header>
 
-            <img mat-card-image [src]="pokemonInfo?.sprites?.front_default" alt="{{ selectedPokemon.name }}" />
+          <img mat-card-image [src]="pokemonInfo?.sprites?.other?.['official-artwork']?.front_default || pokemonInfo?.sprites?.front_default" alt="{{ selectedPokemon.name }}" />
 
-            <mat-card-content>
+          <mat-card-content>
               <p>Taille : {{ pokemonInfo?.height }}</p>
               <p>Poids : {{ pokemonInfo?.weight }}</p>
               <p>

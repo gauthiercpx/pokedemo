@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, inject } from '@angular/core';
 import { Pokemon, PokemonInformations } from '../pokemon';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { PokeAPI } from '../poke-api';
-import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-search-id',
@@ -11,6 +10,9 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrl: './search-id.css',
 })
 export class SearchId implements OnInit {
+  private pokeAPI = inject(PokeAPI);
+  private cdr = inject(ChangeDetectorRef);
+
   idSource: number | null = null;
   idReadonly: number | null = null;
   selectedPokemon?: Pokemon;
@@ -20,8 +22,6 @@ export class SearchId implements OnInit {
 
   pokemons: Pokemon[] = [];
   filteredPokemons: Pokemon[] = [];
-
-  constructor(private pokeAPI: PokeAPI, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.pokeAPI.getPokemonList().subscribe({

@@ -47,6 +47,14 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.poke-card img {
+  max-width: 300px;
+  max-height: 300px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
 /* Responsive : tout en colonne sur mobile */
 @media (max-width: 800px) {
   .main-container {
