@@ -12,6 +12,12 @@ Le but principal : comprendre les bases (data‑binding, composants, services, o
 
 ---
 
+## Aperçu
+
+![Aperçu de l'application Pokédex](public/screenshot.png)
+
+---
+
 ## Fonctionnalités principales (sujet de base)
 
 ### Step 1 : Initialisation du projet
