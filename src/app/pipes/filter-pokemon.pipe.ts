@@ -2,9 +2,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'filterPokemonPipe',
-  standalone: false,
+  standalone: true,
 })
-export class FilterPokemonPipePipe implements PipeTransform {
+export class FilterPokemonPipe implements PipeTransform {
   transform(pokemons: any[], property?: string, searchString?: string): any {
     if (!searchString) {
       return pokemons;
